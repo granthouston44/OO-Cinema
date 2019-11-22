@@ -12,7 +12,16 @@ def initialize(customer_details)
   @fee = customer_details['fee']
 end
 
-
+def save()
+  sql = "
+  INSERT INTO customers
+  (name, fee)
+  VALUES ($1, $2)
+  RETURNING id"
+  values = [@name, @fee]
+  customer = SqlRunner.run(sql, values)
+  @id = customer['id'].to_i  
+end
 
 
 end

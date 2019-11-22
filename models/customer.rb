@@ -9,7 +9,7 @@ attr_accessor :name, :wallet
 def initialize(customer_details)
   @id = customer_details['id'].to_i if customer_details['id']
   @name = customer_details['name']
-  @wallet = customer_details['wallet']
+  @wallet = customer_details['wallet'].to_i
 end
 
 def save()
@@ -19,7 +19,7 @@ def save()
   VALUES ($1, $2)
   RETURNING id"
   values = [@name, @wallet]
-  customer = SqlRunner.run(sql, values)
+  customer = SqlRunner.run(sql, values).first
   @id = customer['id'].to_i
 end
 

@@ -6,7 +6,7 @@ DROP TABLE films;
 CREATE TABLE customers(
   id SERIAL4 PRIMARY KEY,
   name VARCHAR,
-  wallets DECIMAL(4, 2)
+  wallet DECIMAL(4, 2)
 );
 
 CREATE TABLE films(

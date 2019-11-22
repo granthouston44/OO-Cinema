@@ -11,23 +11,23 @@ Film.delete_all()
 Customer.delete_all()
 
 customer1 = Customer.new({
-  'name' => 'Grant', 'funds' => 20
+  'name' => 'Grant', 'wallet' => 20
   })
 
 customer2 = Customer.new({
-    'name' => 'Andrew', 'funds' => 20
+    'name' => 'Andrew', 'wallet' => 20
     })
 
 customer3 = Customer.new({
-      'name' => 'Brendan', 'funds' => 20
+      'name' => 'Brendan', 'wallet' => 20
       })
 
 customer4 = Customer.new({
-        'name' => 'Emma', 'funds' => 20
+        'name' => 'Emma', 'wallet' => 20
         })
 
 customer5 = Customer.new({
-          'name' => 'Debbie', 'funds' => 20
+          'name' => 'Debbie', 'wallet' => 20
           })
 customer1.save()
 customer2.save()

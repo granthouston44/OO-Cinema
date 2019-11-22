@@ -4,23 +4,23 @@ require_relative('film')
 class Customer
 
 attr_reader :id
-attr_accessor :name, :fee
+attr_accessor :name, :wallet
 
 def initialize(customer_details)
   @id = customer_details['id'].to_i if customer_details['id']
   @name = customer_details['name']
-  @fee = customer_details['fee']
+  @wallet = customer_details['wallet']
 end
 
 def save()
   sql = "
   INSERT INTO customers
-  (name, fee)
+  (name, wallet)
   VALUES ($1, $2)
   RETURNING id"
-  values = [@name, @fee]
+  values = [@name, @wallet]
   customer = SqlRunner.run(sql, values)
-  @id = customer['id'].to_i  
+  @id = customer['id'].to_i
 end
 
 

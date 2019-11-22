@@ -34,4 +34,14 @@ def delete()
   SqlRunner.run(sql, values)
 end
 
+def update()
+  sql = "
+  UPDATE customers
+  SET (name, wallet) =
+  ($1, $2)
+  WHERE id = $3"
+  values = [@name, @wallet, @id]
+  SqlRunner.run(sql, values)
+end
+
 end

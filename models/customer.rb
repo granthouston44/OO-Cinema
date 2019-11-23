@@ -11,6 +11,7 @@ class Customer
     @id = customer_details['id'].to_i if customer_details['id']
     @name = customer_details['name']
     @wallet = customer_details['wallet'].to_f
+    @number_of_tickets = customer_details['number_of_tickets']
   end
 
   def save()
@@ -38,10 +39,10 @@ class Customer
   def update()
     sql = "
     UPDATE customers
-    SET (name, wallet) =
-    ($1, $2)
-    WHERE id = $3"
-    values = [@name, @wallet, @id]
+    SET (name, wallet, number_of_tickets) =
+    ($1, $2, $3)
+    WHERE id = $4"
+    values = [@name, @wallet, @number_of_tickets, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -64,10 +65,19 @@ class Customer
     return result.map {|film| Film.new(film)}
   end
 
+  def num_of_tickets()
+    result = film_tickets()
+    @number_of_tickets = result.count
+  end
+
   def buy_tickets()
     tickets = film_tickets()
     tally = tickets.map {|ticket| ticket.price.to_f}
     tally.each {|price| @wallet -= price}
+    num_of_tickets
     update()
   end
+
+
+
 end

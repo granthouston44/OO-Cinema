@@ -57,9 +57,4 @@ def delete
   SqlRunner.run(sql, values)
 end
 
-def sell_ticket
-  @customer.wallet -= @film.price
-  @customer.update
-end
-
 end

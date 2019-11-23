@@ -6,7 +6,7 @@ require_relative('film')
 class Ticket
 
   attr_reader :id
-  attr_accessor :cust_id, :film_id
+  attr_accessor :customer_id, :film_id
 
   def initialize(ticket_details)
     @id = ticket_details['id'].to_i if ticket_details['id']
@@ -35,6 +35,17 @@ def self.all
   sql = "SELECT * FROM tickets"
   tickets = SqlRunner.run(sql)
   return tickets.map {|ticket| Ticket.new(ticket)}
+end
+
+def update
+  sql = "
+  UPDATE tickets
+  SET (customer_id, film_id)
+  = ($1, $2)
+  WHERE id = $3
+  "
+  values = [@customer_id, @film_id, @id]
+  SqlRunner.run(sql, values)
 end
 
 end

@@ -1,5 +1,6 @@
 require_relative('../db/sql_runner')
 require_relative('film')
+require_relative('tickets')
 
 class Customer
 
@@ -9,7 +10,7 @@ class Customer
   def initialize(customer_details)
     @id = customer_details['id'].to_i if customer_details['id']
     @name = customer_details['name']
-    @wallet = customer_details['wallet'].to_i
+    @wallet = customer_details['wallet'].to_f
   end
 
   def save()
@@ -63,4 +64,10 @@ class Customer
     return result.map {|film| Film.new(film)}
   end
 
+  def buy_tickets()
+    tickets = film_tickets()
+    tally = tickets.map {|ticket| ticket.price.to_f}
+    tally.each {|price| @wallet -= price}
+    update()
+  end
 end

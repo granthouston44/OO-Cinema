@@ -30,10 +30,15 @@ customer5 = Customer.new({
           'name' => 'Debbie', 'wallet' => 20
           })
 customer1.save()
+
 customer2.save()
+
 customer3.save()
+
 customer4.save()
+
 customer5.save()
+
 
 film1 = Film.new({
   'title' => 'trainspotting',
@@ -83,6 +88,10 @@ ticket3.save()
 ticket4.save()
 ticket5.save()
 
+customer1.buy_tickets
+customer2.buy_tickets
+customer3.buy_tickets
+customer4.buy_tickets
 
 
 binding.pry

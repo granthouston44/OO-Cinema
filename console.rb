@@ -92,6 +92,9 @@ customer1.buy_tickets
 customer2.buy_tickets
 customer3.buy_tickets
 customer4.buy_tickets
+film1.num_of_customers
+film2.num_of_customers
+film3.num_of_customers
 
 
 binding.pry

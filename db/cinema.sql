@@ -13,7 +13,8 @@ CREATE TABLE customers(
 CREATE TABLE films(
   id SERIAL4 PRIMARY KEY,
   title VARCHAR,
-  price DECIMAL(4, 2)
+  price DECIMAL(4, 2),
+  number_of_customers INT
 );
 
 

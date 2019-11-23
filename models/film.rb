@@ -10,6 +10,7 @@ def initialize(film_details)
   @id = film_details['id'].to_i if film_details['id']
   @title = film_details['title']
   @price = film_details['price']
+  @number_of_customers = film_details['number_of_customers']
 end
 
 def save()
@@ -45,11 +46,11 @@ end
 def update
   sql = "
   UPDATE films
-  SET (title, price) =
-  ($1, $2)
-  WHERE id = $3
+  SET (title, price, number_of_customers) =
+  ($1, $2, $3)
+  WHERE id = $4
   "
-  values = [@title, @price, @id]
+  values = [@title, @price, @number_of_customers, @id]
   SqlRunner.run(sql, values)
 end
 
@@ -64,5 +65,10 @@ end
   return nil if result.count == 0
   return result.map {|customer| Customer.new(customer)}
  end
+
+def num_of_customers
+  @number_of_customers = customers.count
+  update()
+end
 
 end

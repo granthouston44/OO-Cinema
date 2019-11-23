@@ -35,6 +35,23 @@ customer3.save()
 customer4.save()
 customer5.save()
 
+film1 = Film.new({
+  'title' => 'trainspotting',
+  'price' => 6.99
+  })
+film1.save()
+
+film2 = Film.new({
+  'title' => 'Tangled',
+  'price' => '6.99'
+  })
+film2.save()
+
+film3 = Film.new({
+  'title' => 'Choomah Island 3: Denoument',
+  'price' => '6.99'
+  })
+
 
 
 

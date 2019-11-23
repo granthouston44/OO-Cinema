@@ -4,7 +4,7 @@ require_relative('customer')
 class Film
 
 attr_reader :id
-attr_accessor :name, :price
+attr_accessor :title, :price
 
 def initialize(film_details)
   @id = film_details['id'].to_i if film_details['id']
@@ -12,5 +12,16 @@ def initialize(film_details)
   @price = film_details['price']
 end
 
+def save()
+  sql = "
+  INSERT INTO films
+  (title, price)
+  VALUES ($1, $2)
+  RETURNING id
+  "
+  values = [@title, @price]
+  film = SqlRunner.run(sql, values).first
+  @id = film['id'].to_i
+end
 
 end

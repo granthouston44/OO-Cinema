@@ -35,6 +35,13 @@ def delete
   SqlRunner.run(sql, values)
 end
 
+def self.all
+  sql = "SELECT * FROM films"
+  films = SqlRunner.run(sql)
+  result = films.map {|film| Film.new(film)}
+  return result
+end
+
 
 
 

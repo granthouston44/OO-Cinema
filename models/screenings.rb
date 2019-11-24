@@ -1,10 +1,11 @@
 require_relative('../db/sql_runner')
+require_relative('film')
 
 class Screening
 
   attr_reader :id
 
-  attr_accessor :film_id, :showtimes, :tickets_available
+  attr_accessor :film_id, :showtime, :tickets_available
 
   def initialize(screening_details)
     @id = screening_details['id'].to_i if screening_details['id']
@@ -27,11 +28,19 @@ class Screening
   end
 
   def update()
-
+  sql = "
+  UPDATE screenings
+  SET (film_id, showtime, tickets_available)
+  = ($1, $2, $3)
+  WHERE id = $4
+  "
+  values = [@film_id,@showtime, @tickets_available, @id]
+  SqlRunner.run(sql,values)
   end
 
   def self.delete_all
-
+    sql = "DELETE FROM screenings"
+    SqlRunner.run(sql)
   end
 
   def self.all

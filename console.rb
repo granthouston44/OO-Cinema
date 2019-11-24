@@ -6,7 +6,7 @@ require_relative('models/tickets')
 require('pry')
 
 Ticket.delete_all()
-# Screening.delete_all()
+Screening.delete_all()
 Film.delete_all()
 Customer.delete_all()
 

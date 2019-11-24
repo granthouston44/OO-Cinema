@@ -1,6 +1,7 @@
 require_relative('../db/sql_runner')
 require_relative('film')
 require_relative('tickets')
+require_relative('screenings')
 
 class Customer
 
@@ -75,6 +76,7 @@ class Customer
     tally = tickets.map {|ticket| ticket.price.to_f}
     tally.each {|price| @wallet -= price}
     num_of_tickets
+    
     update()
   end
 

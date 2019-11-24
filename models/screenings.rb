@@ -5,11 +5,10 @@ class Screening
 
   attr_reader :id
 
-  attr_accessor :film_id, :showtime, :tickets_available
+  attr_accessor :showtime, :tickets_available
 
   def initialize(screening_details)
     @id = screening_details['id'].to_i if screening_details['id']
-    @film_id = screening_details['film_id'].to_i
     @showtime = screening_details['showtime']
     @tickets_available = 5
   end
@@ -18,11 +17,11 @@ class Screening
   def save()
     sql = "
     INSERT INTO screenings
-    (film_id, showtime, tickets_available)
-    VALUES ($1, $2, $3)
+    (showtime, tickets_available)
+    VALUES ($1, $2)
     RETURNING id
     "
-    values = [@film_id, @showtime, @tickets_available]
+    values = [@showtime, @tickets_available]
     showtime = SqlRunner.run(sql, values).first
     @id = showtime['id'].to_i
   end
@@ -30,11 +29,11 @@ class Screening
   def update()
   sql = "
   UPDATE screenings
-  SET (film_id, showtime, tickets_available)
-  = ($1, $2, $3)
-  WHERE id = $4
+  SET (showtime, tickets_available)
+  = ($1, $2)
+  WHERE id = £3
   "
-  values = [@film_id,@showtime, @tickets_available, @id]
+  values = [@showtime, @tickets_available, @id]
   SqlRunner.run(sql,values)
   end
 
@@ -61,6 +60,9 @@ class Screening
   end
 
 
-
+  # def popular
+  #   screenings = self.all
+  #
+  # end
 
 end

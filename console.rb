@@ -88,6 +88,26 @@ ticket3.save()
 ticket4.save()
 ticket5.save()
 
+
+screening1 = Screening.new({
+  'film_id' => film2.id,
+  'showtime' => '14:00'
+  })
+
+screening2 = Screening.new({
+  'film_id' => film2.id,
+  'showtime' => '18:00'
+  })
+
+screening3 = Screening.new({
+  'film_id' => film1.id,
+  'showtime' => '14:00'
+  })
+
+screening1.save()
+screening2.save()
+screening3.save()
+
 customer1.buy_tickets
 customer2.buy_tickets
 customer3.buy_tickets

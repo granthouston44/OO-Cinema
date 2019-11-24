@@ -20,13 +20,14 @@ CREATE TABLE films(
 
 CREATE TABLE screenings(
   id SERIAL4 PRIMARY KEY,
-  showtimes VARCHAR,
-  film_id INT REFERENCES films(id)
+  film_id INT REFERENCES films(id),
+  showtime VARCHAR,
+  tickets_available INT
 );
 
 CREATE TABLE tickets(
   id SERIAL4 PRIMARY KEY,
   customer_id INT REFERENCES customers(id),
-  tickets_available INT, 
+  tickets_available INT,
   film_id INT REFERENCES films(id)
 );

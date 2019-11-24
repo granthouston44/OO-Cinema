@@ -15,8 +15,7 @@ class ScreeningTest < MiniTest::Test
 
     Screening.new({
       'film_id' => film2.id,
-      'showtimes' => ['14:00', '18:00'],
-      'tickets_available' => 5
+      'showtime' => '14:00'
       })
   end
 

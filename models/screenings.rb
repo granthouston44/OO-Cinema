@@ -1,5 +1,5 @@
 require_relative('../db/sql_runner')
-require_relative('film')
+
 
 class Screening
 
@@ -31,7 +31,7 @@ class Screening
   UPDATE screenings
   SET (showtime, tickets_available)
   = ($1, $2)
-  WHERE id = £3
+  WHERE id = $3
   "
   values = [@showtime, @tickets_available, @id]
   SqlRunner.run(sql,values)
@@ -58,11 +58,5 @@ class Screening
     values = [@id]
     SqlRunner.run(sql,values)
   end
-
-
-  # def popular
-  #   screenings = self.all
-  #
-  # end
 
 end

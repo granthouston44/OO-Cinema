@@ -53,7 +53,8 @@ class Customer
     return customers.map {|customer| Customer.new(customer)}
   end
 
-  def film_tickets()
+#method that shows which films a customer is going to see
+  def films()
     sql = "
     SELECT films.* FROM films
     INNER JOIN tickets ON tickets.film_id =
@@ -66,17 +67,34 @@ class Customer
     return result.map {|film| Film.new(film)}
   end
 
+#the number of tickets a customer has
   def num_of_tickets()
-    result = film_tickets()
+    result = films()
     @number_of_tickets = result.count
   end
 
-  def buy_tickets()
-    tickets = film_tickets()
-    tally = tickets.map {|ticket| ticket.price.to_f}
+#method that returns the tickets a customer has
+  def tickets
+    sql = "
+    SELECT * FROM tickets
+    WHERE customer_id = $1
+    "
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return nil if result.count == 0
+    return result.map {|ticket| Ticket.new(ticket)}
+  end
+
+#customer buys the tickets, updating their wallet and the number of tickets they have
+#updates the number of available tickets for that screening
+  def buy_tickets
+    tally = films().map {|ticket| ticket.price.to_f}
     tally.each {|price| @wallet -= price}
     num_of_tickets
-    
+    screenings = tickets().map{|ticket| ticket.screening}
+    screenings_flat = screenings.flatten
+    screenings_flat.map {|screening| screening.tickets_available -= 1}
+    screenings_flat.each {|screening| p screening.update }
     update()
   end
 

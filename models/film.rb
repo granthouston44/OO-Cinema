@@ -54,6 +54,7 @@ def update
   SqlRunner.run(sql, values)
 end
 
+
  def customers
   sql = "
   SELECT customers.* FROM customers
@@ -66,9 +67,25 @@ end
   return result.map {|customer| Customer.new(customer)}
  end
 
+#number of customers booked to see a film
 def num_of_customers
   @number_of_customers = customers.count
   update()
 end
+
+#shows the different showtimes available for a specified film
+def times
+  sql = "
+  SELECT screenings.* FROM screenings
+  INNER JOIN tickets ON tickets.screening_id =
+  screenings.id WHERE film_id = $1
+  "
+  values = [@id]
+  result = SqlRunner.run(sql, values)
+  return nil if result.count == 0
+  return result.map {|time| Screening.new(time)}
+end
+
+
 
 end

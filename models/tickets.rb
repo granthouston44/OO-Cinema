@@ -59,6 +59,18 @@ def delete
   SqlRunner.run(sql, values)
 end
 
+def screening
+  sql = "
+  SELECT screenings.* FROM screenings
+  INNER JOIN tickets ON tickets.screening_id =
+  screenings.id WHERE tickets.id = $1
+  "
+  values = [@id]
+  result = SqlRunner.run(sql, values)
+  return nil if result.count == 0
+  return result.map {|screening| Screening.new(screening)}
+end
+
 
 
 end
